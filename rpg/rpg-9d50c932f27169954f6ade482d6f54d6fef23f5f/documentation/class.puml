@@ -1,0 +1,130 @@
+@startuml class
+
+CharacterCreator <|-- WarriorCreator
+CharacterCreator <|-- WizardCreator
+CharacterCreator <|-- HealerCreator
+Personnage <|.. GameCharacter
+GameCharacter <|-- Warrior
+GameCharacter <|-- Wizard
+GameCharacter <|-- Healer
+Warrior <-- WarriorCreator
+Wizard <-- WizardCreator
+Healer <-- HealerCreator
+Weapon "0-1" <-- GameCharacter : "0-1"
+Armor "0-1" <-- GameCharacter : "*"
+Armor <|-- Helmet
+Armor <|-- Robe
+Armor <|-- Shield
+Weapon <|-- Sword
+Weapon <|-- Staff 
+Weapon <|-- Wand 
+CharacterVisitor <|-- BuffVisitor
+CharacterVisitor <|-- DamageVisitor
+CharacterVisitor <|-- HealVisitor
+CharacterVisitor <.. Personnage
+
+abstract class GameCharacter{
+    String name
+    int health
+    int experiencepoints
+    int level
+}
+
+class Healer{
+    int wisdom
+}
+
+class Wizard{
+    int intelligence
+}
+
+class Warrior{
+    int strength
+}
+
+class Armor{
+    String name
+    int defense
+}
+
+class Helmet{
+
+}
+
+class Robe{
+
+}
+
+class Shield{
+
+}
+
+class Weapon{
+    String name
+    int damage
+}
+
+class Sword{
+    int sharpness
+}
+
+class Staff{
+    int magic
+}
+
+class Wand{
+    int magic
+}
+
+class GameConfiguration {
+    Integer difficulty_level
+    Integer teammate
+    GameConfiguration instance
+
+    public GameConfiguration getInstance()
+    public void setGameConfiguration(Integer difficulty, Integer team)
+    public void setDifficulty(Integer difficulty) 
+    public void setTeam(Integer team)
+    public Integer getDifficulty()
+    public Integer getTeam()
+}
+
+abstract class CharacterCreator {
+    protected abstract GameCharacter createCharacter()
+}
+
+class WarriorCreator {
+    protected Warrior createCharacter()
+}
+
+class WizardCreator {
+    protected Wizard createCharacter()
+}
+
+class HealerCreator{
+    protected Healer createCharacter()
+}
+interface Personnage{
+}
+
+interface CharacterVisitor{
+    void BuffVisitor()
+    void DamageVisitor()
+    void HealVisitor()
+}
+
+class BuffVisitor{
+    void visitElementA
+}
+
+class DamageVisitor{
+    void visitElementA
+}
+
+class HealVisitor{
+    void visitElementA
+}
+
+
+
+@enduml
